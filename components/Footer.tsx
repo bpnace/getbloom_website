@@ -46,7 +46,7 @@ const Footer: React.FC = () => {
         </div>
         
         {/* Semi-transparent overlay to ensure text readability */}
-        <div className="absolute inset-0 w-full h-full z-0 bg-darkGray opacity-90"></div>
+        <div className="absolute inset-0 w-full h-full z-0 bg-darkGray opacity-40"></div>
         
         <div className="relative z-10 max-w-7xl mx-auto text-white">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
