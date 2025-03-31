@@ -22,8 +22,8 @@ const Footer: React.FC = () => {
                 <Image 
                   src="/GDPR_CCPA.webp" 
                   alt="GDPR & CCPA Compliance" 
-                  width={100} 
-                  height={100}
+                  width={240} 
+                  height={240}
                   className="rounded-full"
                 />
               </div>
