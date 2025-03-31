@@ -51,10 +51,10 @@ const Hero: React.FC = () => {
 
       {/* Company logos section */}
       <div className="bg-white py-8">
-        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-          <p className="text-center text-darkGray mb-6 text-xl font-medium">
-            Diese Unternehmen unterstützen ihre Teams bereits mit Bloom:
-          </p>
+        <p className="text-center text-darkGray mb-6 text-xl font-medium px-6 md:px-12 lg:px-20">
+          Diese Unternehmen unterstützen ihre Teams bereits mit Bloom:
+        </p>
+        <div className="w-full">
           <LogoSlideshow />
         </div>
       </div>

@@ -19,9 +19,13 @@ const Footer: React.FC = () => {
             </div>
             <div className="flex items-center justify-center md:justify-end space-x-8">
               <div className="flex items-center">
-                <div className="bg-lightGray p-2 rounded-full mr-2 flex items-center justify-center" style={{ width: '50px', height: '50px' }}>
-                  <span className="text-xs font-medium">GDPR & CCPA</span>
-                </div>
+                <Image 
+                  src="/GDPR_CCPA.webp" 
+                  alt="GDPR & CCPA Compliance" 
+                  width={240} 
+                  height={240}
+                  className="rounded-full"
+                />
               </div>
             </div>
           </div>

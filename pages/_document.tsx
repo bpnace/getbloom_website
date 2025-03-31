@@ -8,6 +8,8 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" 
           rel="stylesheet" 
         />
+        <link rel="icon" type="image/png" href="/Favicon_large.png" />
+        <link rel="shortcut icon" href="/Favicon_large.png" />
       </Head>
       <body className="antialiased">
         <Main />

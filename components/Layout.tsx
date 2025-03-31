@@ -14,7 +14,8 @@ const Layout: React.FC<LayoutProps> = ({ children, title = 'Bloom - Gesundheits-
       <Head>
         <title>{title}</title>
         <meta name="description" content="Bloom - Die All-in-One-Lösung für Gesundheits- und Abwesenheitsmanagement. Mit zielgerichteten Lösungen und datenbasierten Einblicken die Gesundheit der Mitarbeiter:innen stärken und Ausfallzeiten signifikant reduzieren." />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/Favicon_large.png" />
+        <link rel="apple-touch-icon" href="/Favicon_large.png" />
       </Head>
       <Header />
       <main className="flex-grow">
