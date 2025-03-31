@@ -22,8 +22,8 @@ const Footer: React.FC = () => {
                 <Image 
                   src="/GDPR_CCPA.webp" 
                   alt="GDPR & CCPA Compliance" 
-                  width={240} 
-                  height={240}
+                  width={100} 
+                  height={100}
                   className="rounded-full"
                 />
               </div>
@@ -33,8 +33,18 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Main Footer */}
-      <div className="bg-darkGray text-white py-12 px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <div className="relative bg-darkGray text-white py-12 px-6 md:px-12 lg:px-20 overflow-hidden">
+        {/* Background SVG */}
+        <div className="absolute inset-0 z-0 opacity-10">
+          <Image
+            src="/footer_bg.svg"
+            alt="Footer background"
+            fill
+            style={{ objectFit: 'cover' }}
+          />
+        </div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <div className="mb-6 md:mb-0">
               <Link href="/">
