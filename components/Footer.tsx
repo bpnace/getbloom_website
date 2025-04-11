@@ -33,8 +33,22 @@ const Footer: React.FC = () => {
       </div>
 
       {/* Main Footer */}
-      <div className="bg-darkGray text-white py-12 px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
+      <div className="relative py-12 px-6 md:px-12 lg:px-20 overflow-hidden">
+        {/* Background SVG - increased opacity and ensuring it's behind content */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <Image
+            src="/footer_bg.svg"
+            alt="Footer background"
+            fill
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            priority
+          />
+        </div>
+        
+        {/* Semi-transparent overlay to ensure text readability */}
+        <div className="absolute inset-0 w-full h-full z-0 bg-darkGray opacity-40"></div>
+        
+        <div className="relative z-10 max-w-7xl mx-auto text-white">
           <div className="flex flex-col md:flex-row justify-between items-center mb-8">
             <div className="mb-6 md:mb-0">
               <Link href="/">

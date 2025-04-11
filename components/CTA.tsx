@@ -1,5 +1,5 @@
 import React from 'react';
-import AppointmentCalendar from './AppointmentCalendar';
+import Image from 'next/image';
 
 interface CTAProps {
   title: string;
@@ -30,8 +30,16 @@ const CTA: React.FC<CTAProps> = ({ title, text }) => {
           </div>
           
           {/* Right Column - Calendar */}
-          <div>
-            <AppointmentCalendar />
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              <Image 
+                src="/calendar_dummy.png" 
+                alt="Calendar Appointment Scheduler" 
+                width={900}
+                height={600}
+                className="rounded-xl shadow-lg"
+              />
+            </div>
           </div>
         </div>
       </div>
