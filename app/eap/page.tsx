@@ -1,11 +1,19 @@
 import React from 'react';
-import Layout from '../components/Layout';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function EAP() {
+// It's good practice to define metadata for each page
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'EAP - Employee Assistance Program | Bloom',
+  // Add a description if desired
+  // description: 'Description for EAP page',
+};
+
+export default function EAPPage() {
   return (
-    <Layout title="EAP - Employee Assistance Program | Bloom">
+    <>
       <div className="pt-28 pb-16 bg-white">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -30,7 +38,9 @@ export default function EAP() {
             </div>
             <div className="flex justify-center">
               <div className="rounded-lg overflow-hidden w-full max-w-lg h-96 bg-gray-100 flex items-center justify-center">
-                <p className="text-gray-500">EAP Image</p>
+                {/* Consider adding an actual image here using next/image */}
+                {/* <Image src="/path/to/eap-image.jpg" alt="EAP Illustration" width={500} height={384} /> */}
+                <p className="text-gray-500">EAP Image Placeholder</p> 
               </div>
             </div>
           </div>
@@ -58,6 +68,6 @@ export default function EAP() {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 } 

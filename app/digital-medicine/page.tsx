@@ -1,11 +1,16 @@
 import React from 'react';
-import Layout from '../components/Layout';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { Metadata } from 'next';
 
-export default function DigitalMedicine() {
+export const metadata: Metadata = {
+  title: 'Digitale Arbeitsmedizin | Bloom',
+  // description: 'Description for Digital Medicine page',
+};
+
+export default function DigitalMedicinePage() {
   return (
-    <Layout title="Digitale Arbeitsmedizin | Bloom">
+    <>
       <div className="pt-28 pb-16 bg-white">
         <div className="container mx-auto px-6 md:px-12 lg:px-20">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -30,7 +35,8 @@ export default function DigitalMedicine() {
             </div>
             <div className="flex justify-center">
               <div className="rounded-lg overflow-hidden w-full max-w-lg h-96 bg-gray-100 flex items-center justify-center">
-                <p className="text-gray-500">Digital Medicine Image</p>
+                 {/* Consider adding an actual image here using next/image */}
+                <p className="text-gray-500">Digital Medicine Image Placeholder</p>
               </div>
             </div>
           </div>
@@ -78,6 +84,6 @@ export default function DigitalMedicine() {
           </div>
         </div>
       </div>
-    </Layout>
+    </>
   );
 } 
