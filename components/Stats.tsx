@@ -2,16 +2,18 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { T } from '@tolgee/react';
+import { T, useTranslate } from '@tolgee/react';
 
 const Stats: React.FC = () => {
+  const { t } = useTranslate();
+
   return (
     <div className="relative">
       {/* Gradient background - extended upwards with negative margin */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden -mt-64">
         <Image 
           src="/gradient2.svg" 
-          alt="Gradient background" 
+          alt={t('home.stats.background_image.alt.label')}
           fill
           className="object-cover"
           priority
@@ -22,10 +24,10 @@ const Stats: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              <T keyName="stats_headline" defaultValue="Bloom - eine innovative Lösung für anspruchsvolle Unternehmen" />
+              <T keyName="home.stats.headline.label" />
             </h2>
             <p className="text-lg mb-8 text-white max-w-3xl mx-auto">
-              <T keyName="stats_subheadline" defaultValue="Erfahre, wie du mit Bloom arbeitsmedizinische Vorsorge effizient organisierst, die Gesundheit des Teams förderst und gesetzliche Anforderungen erfüllst." />
+              <T keyName="home.stats.subheadline.label" />
             </p>
           </div>
           
@@ -37,7 +39,7 @@ const Stats: React.FC = () => {
                 className="w-full h-auto"
                 poster="/Video/Thumbnail_final.webp"
               >
-                <T keyName="stats_video_fallback" defaultValue="Your browser does not support the video tag." />
+                <T keyName="home.stats.video_fallback.label" />
               </video>
             </div>
           </div>

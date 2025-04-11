@@ -6,12 +6,10 @@ import { useTranslate } from '@tolgee/react';
 
 interface CTAProps {
   titleKey: string;
-  defaultTitle: string;
   textKey: string;
-  defaultText: string;
 }
 
-const CTA: React.FC<CTAProps> = ({ titleKey, defaultTitle, textKey, defaultText }) => {
+const CTA: React.FC<CTAProps> = ({ titleKey, textKey }) => {
   const { t } = useTranslate();
 
   return (
@@ -21,17 +19,17 @@ const CTA: React.FC<CTAProps> = ({ titleKey, defaultTitle, textKey, defaultText 
           {/* Left Column - Text */}
           <div className="text-left">
             <h2 className="text-3xl font-bold mb-6 text-darkGray">
-              {t(titleKey, defaultTitle)}
+              {t(titleKey)}
             </h2>
             <p className="text-neutralGray leading-relaxed">
-              {t(textKey, defaultText)}
+              {t(textKey)}
             </p>
             <div className="mt-8">
               <a 
                 href="/demo" 
                 className="bg-primary text-white py-3 px-8 rounded-full font-medium hover:bg-opacity-90 transition-colors inline-block"
               >
-                {t('button_book_demo', 'Demo buchen')}
+                {t('home.cta.book_demo_button.label')}
               </a>
             </div>
           </div>

@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { T } from '@tolgee/react';
+import { T, useTranslate } from '@tolgee/react';
 
 const Integrations: React.FC = () => {
+  const { t } = useTranslate();
   // Array of integration partners with their logo paths
   const integrationPartners = [
     { name: 'HR System 1', logo: '/Integration logos/HRworks-1.svg' },
@@ -23,7 +24,7 @@ const Integrations: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-medium text-darkGray mb-4">
-            <T keyName="integrations_headline" defaultValue="Blooms Integrationen" />
+            <T keyName="home.integrations.headline.label" />
           </h2>
           
           {/* Decorative separator */}
@@ -32,7 +33,7 @@ const Integrations: React.FC = () => {
           </div>
           
           <p className="text-center text-neutralGray max-w-2xl mx-auto">
-            <T keyName="integrations_subheadline" defaultValue="Nahtlose Verbindung zu führenden HR-Systemen und Technologieplattformen" />
+            <T keyName="home.integrations.subheadline.label" />
           </p>
         </div>
 
@@ -60,7 +61,7 @@ const Integrations: React.FC = () => {
                 <div className="relative h-16 w-full">
                   <Image
                     src={partner.logo}
-                    alt={`${partner.name} logo`}
+                    alt={t('home.integrations.partner_logo.alt.label')}
                     fill
                     style={{ objectFit: 'contain' }}
                     priority
@@ -92,7 +93,7 @@ const Integrations: React.FC = () => {
                 <div className="relative h-16 w-full">
                   <Image
                     src={partner.logo}
-                    alt={`${partner.name} logo`}
+                    alt={t('home.integrations.partner_logo.alt.label')}
                     fill
                     style={{ objectFit: 'contain' }}
                     priority={index === 0}
@@ -105,7 +106,7 @@ const Integrations: React.FC = () => {
 
         <div className="text-center mt-10">
           <p className="text-neutralGray font-medium">
-            <T keyName="integrations_more" defaultValue="+ viele weitere" />
+            <T keyName="home.integrations.more.label" />
           </p>
         </div>
       </div>

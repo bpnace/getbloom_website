@@ -74,7 +74,6 @@ const Footer: React.FC = () => {
               </h4>
               <ul className="space-y-2 text-white text-opacity-70">
                 <li><Link href="/eap" className="hover:text-opacity-100"><T keyName="footer_link_eap" defaultValue="Employee Assistance Program" /></Link></li>
-                <li><Link href="/digital-medicine" className="hover:text-opacity-100"><T keyName="footer_link_digital_medicine" defaultValue="Digitale Arbeitsmedizin" /></Link></li>
                 <li><Link href="/data" className="hover:text-opacity-100"><T keyName="footer_link_data_insights" defaultValue="Daten & Einblicke" /></Link></li>
               </ul>
             </div>

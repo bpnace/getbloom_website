@@ -12,10 +12,8 @@ export default function Home() {
       <Stats />
       <Integrations />
       <CTA 
-        titleKey="cta_home_title" 
-        defaultTitle="Erfahre mehr über Bloom"
-        textKey="cta_home_text" 
-        defaultText="Erfahre, wie du mit Bloom arbeitsmedizinische Vorsorge effizient organisierst, die Gesundheit des Teams förderst und gesetzliche Anforderungen erfüllst."
+        titleKey="home.cta.title.label" 
+        textKey="home.cta.text.label" 
       />
     </>
   );
