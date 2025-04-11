@@ -1,5 +1,8 @@
+'use client';
+
 import React from 'react';
 import Image from 'next/image';
+import { T } from '@tolgee/react';
 
 const Stats: React.FC = () => {
   return (
@@ -19,10 +22,10 @@ const Stats: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-              Bloom - eine innovative Lösung für anspruchsvolle Unternehmen
+              <T keyName="stats_headline" defaultValue="Bloom - eine innovative Lösung für anspruchsvolle Unternehmen" />
             </h2>
             <p className="text-lg mb-8 text-white max-w-3xl mx-auto">
-              Erfahre, wie du mit Bloom arbeitsmedizinische Vorsorge effizient organisierst, die Gesundheit des Teams förderst und gesetzliche Anforderungen erfüllst.
+              <T keyName="stats_subheadline" defaultValue="Erfahre, wie du mit Bloom arbeitsmedizinische Vorsorge effizient organisierst, die Gesundheit des Teams förderst und gesetzliche Anforderungen erfüllst." />
             </p>
           </div>
           
@@ -34,7 +37,7 @@ const Stats: React.FC = () => {
                 className="w-full h-auto"
                 poster="/Video/Thumbnail_final.webp"
               >
-                Your browser does not support the video tag.
+                <T keyName="stats_video_fallback" defaultValue="Your browser does not support the video tag." />
               </video>
             </div>
           </div>

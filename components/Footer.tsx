@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { T } from '@tolgee/react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -64,38 +67,40 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-opacity-20 border-white">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-8 border-t border-opacity-20 border-white">
             <div>
-              <h4 className="text-white font-medium mb-4">Produkt</h4>
+              <h4 className="text-white font-medium mb-4">
+                <T keyName="footer_heading_product" defaultValue="Produkt" />
+              </h4>
               <ul className="space-y-2 text-white text-opacity-70">
-                <li><Link href="/eap" className="hover:text-opacity-100">Employee Assistance Program</Link></li>
-                <li><Link href="/digital-medicine" className="hover:text-opacity-100">Digitale Arbeitsmedizin</Link></li>
-                <li><Link href="/data" className="hover:text-opacity-100">Daten & Einblicke</Link></li>
+                <li><Link href="/eap" className="hover:text-opacity-100"><T keyName="footer_link_eap" defaultValue="Employee Assistance Program" /></Link></li>
+                <li><Link href="/digital-medicine" className="hover:text-opacity-100"><T keyName="footer_link_digital_medicine" defaultValue="Digitale Arbeitsmedizin" /></Link></li>
+                <li><Link href="/data" className="hover:text-opacity-100"><T keyName="footer_link_data_insights" defaultValue="Daten & Einblicke" /></Link></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-medium mb-4">Ressourcen</h4>
+              <h4 className="text-white font-medium mb-4">
+                <T keyName="footer_heading_company" defaultValue="Unternehmen" />
+              </h4>
               <ul className="space-y-2 text-white text-opacity-70">
-                <li><Link href="/resources" className="hover:text-opacity-100">Übersicht</Link></li>
-                <li><Link href="/case-studies" className="hover:text-opacity-100">Kundenberichte</Link></li>
-                <li><Link href="/blog" className="hover:text-opacity-100">Blog</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-white font-medium mb-4">Unternehmen</h4>
-              <ul className="space-y-2 text-white text-opacity-70">
-                <li><Link href="/impressum" className="hover:text-opacity-100">Impressum</Link></li>
-                <li><Link href="/datenschutz-website" className="hover:text-opacity-100">Datenschutz – Webseite</Link></li>
-                <li><Link href="/datenschutz-consumer" className="hover:text-opacity-100">Datenschutz – Consumer</Link></li>
-                <li><Link href="/jobs" className="hover:text-opacity-100">Jobs</Link></li>
+                <li><Link href="/legal-notice" className="hover:text-opacity-100"><T keyName="footer_link_legal_notice" defaultValue="Impressum" /></Link></li>
+                <li><Link href="/data-privacy-website" className="hover:text-opacity-100"><T keyName="footer_link_privacy_website" defaultValue="Datenschutz – Webseite" /></Link></li>
+                <li><Link href="/data-privacy-consumer" className="hover:text-opacity-100"><T keyName="footer_link_privacy_app" defaultValue="Datenschutz – App" /></Link></li>
+                <li><Link href="/jobs" className="hover:text-opacity-100"><T keyName="footer_link_jobs" defaultValue="Jobs" /></Link></li>
               </ul>
             </div>
           </div>
 
+          {/* Footer Bottom Info */}
           <div className="mt-12 text-sm border-t border-opacity-20 border-white pt-8 text-white text-opacity-70">
-            <p>Bloom ist eine Marke der Menta Health GmbH<br />
-            Kolonnenstr. 8, 10827 Berlin, Deutschland</p>
-            <p className="mt-4">Bloom {currentYear}</p>
+            <p>
+              <T keyName="footer_brand_notice" defaultValue="Bloom ist eine Marke der Menta Health GmbH" />
+              <br />
+              Kolonnenstr. 8, 10827 Berlin, Deutschland { /* Address might not need translation? */}
+            </p>
+            <p className="mt-4">
+              <T keyName="footer_copyright" defaultValue="Bloom {currentYear}" params={{ currentYear }} />
+            </p>
           </div>
         </div>
       </div>

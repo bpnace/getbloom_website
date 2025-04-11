@@ -1,8 +1,11 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import LogoSlideshow from './LogoSlideshow';
 import Features from './Features';
+import { T } from '@tolgee/react';
 
 const Hero: React.FC = () => {
   return (
@@ -25,17 +28,17 @@ const Hero: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
             <div className="z-10 md:col-span-2">
               <h1 className="text-hero font-medium text-white mb-6 leading-tight">
-                Die All-in-One-Lösung für Arbeitsmedizin, Arbeitssicherheit und Gesundheitsmanagement
+                <T keyName="hero_headline" defaultValue="Die All-in-One-Lösung für Arbeitsmedizin, Arbeitssicherheit und Gesundheitsmanagement" />
               </h1>
               <p className="text-lg text-white mb-8 max-w-2xl">
-                Mit zielgerichteten Lösungen und datenbasierten Einblicken die Gesundheit der Mitarbeiter:innen stärken und Ausfallzeiten signifikant reduzieren.
+                <T keyName="hero_subheadline" defaultValue="Mit zielgerichteten Lösungen und datenbasierten Einblicken die Gesundheit der Mitarbeiter:innen stärken und Ausfallzeiten signifikant reduzieren." />
               </p>
               <div className="mt-8">
                 <Link 
                   href="/demo" 
                   className="bg-primary text-white py-3 px-8 rounded-md font-medium hover:bg-opacity-90 transition-colors text-center inline-flex items-center"
                 >
-                  Demo buchen
+                  <T keyName="button_book_demo" defaultValue="Demo buchen" />
                   <svg className="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
@@ -52,7 +55,7 @@ const Hero: React.FC = () => {
       {/* Company logos section */}
       <div className="bg-white py-8">
         <p className="text-center text-darkGray mb-6 text-xl font-medium px-6 md:px-12 lg:px-20">
-          Diese Unternehmen unterstützen ihre Teams bereits mit Bloom:
+          <T keyName="hero_companies_intro" defaultValue="Diese Unternehmen unterstützen ihre Teams bereits mit Bloom:" />
         </p>
         <div className="w-full">
           <LogoSlideshow />

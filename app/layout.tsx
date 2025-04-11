@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import { Outfit } from 'next/font/google';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import TolgeeProviderWrapper from '../components/TolgeeProviderWrapper';
 
 const outfit = Outfit({ subsets: ['latin'] });
 
@@ -23,11 +24,13 @@ export default function RootLayout({
   return (
     <html lang="de">
       <body className={`${outfit.className} flex min-h-screen flex-col`}>
-        <Header />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
+        <TolgeeProviderWrapper>
+          <Header />
+          <main className="flex-grow">
+            {children}
+          </main>
+          <Footer />
+        </TolgeeProviderWrapper>
       </body>
     </html>
   )

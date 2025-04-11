@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tolgee/core": "^6.2.4",
+    "@tolgee/format-icu": "^6.2.4",
+    "@tolgee/react": "^6.2.4",
+    "@tolgee/web": "^6.2.4",
     "classnames": "^2.5.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.6.2",

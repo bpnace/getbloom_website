@@ -1,280 +1,151 @@
-Build Instructions for Website Recreation in Cursor Agent Mode (Cloud 3.7)
+# Bloom - Health and Absence Management Platform
 
-This document provides all the instructions required to recreate the website design as detailed in the “Website Design & Assets.pdf”. Every section, button, and frame is defined with precision and without any improvised elements. The components are built to be reusable and follow the exact layout and style specified.
+Bloom Logo (Update path if needed: `public/Logo1.svg`)
 
-⸻
+Bloom provides an all-in-one solution for modern health and absence management. Leveraging targeted solutions and data-driven insights, Bloom helps companies enhance employee well-being and significantly reduce downtime.
 
-	1.	General Guidelines
+## Table of Contents
 
-	•	Exact Replication: Recreate only the design elements shown in the PDF.
-	•	Reusable Components: Define and reuse objects for headers, buttons, cards, frames, and text blocks.
-	•	Consistency: Maintain consistent typography, color schemes, spacing, and layout across all sections.
-	•	Responsive & Accessible: Ensure the final build is responsive and meets accessibility standards.
-	•	Semantic Markup: Use semantic HTML/CSS components as per the framework requirements.
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Key Features](#key-features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running the Development Server](#running-the-development-server)
+- [Available Scripts](#available-scripts)
+- [Localization](#localization)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
 
-⸻
+## Tech Stack
 
-	2.	Project Initialization
+- **Framework**: [Next.js](https://nextjs.org/) (using App Router)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **UI Library**: [React](https://reactjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Localization (i18n)**: [Tolgee](https://tolgee.io/)
+- **Animation**: CSS Transitions & Keyframes / Framer Motion (Verify which is primary)
+- **Image Optimization**: Next.js Image Component (`next/image`)
+- **Typography**: Outfit (Google Fonts)
+- **Version Control**: Git
 
-// Initialize the project for Cursor Agent Mode on Cloud 3.7
-init_project –name “Bloom_Website” –mode “cursor_agent” –version “3.7”
+## Project Structure
 
-// Set global theme settings (adjust fonts, colors, etc., according to the design)
-set_theme –font “Roboto, sans-serif” –primary_color “#007BFF” –secondary_color “#FFFFFF”
+```
+getbloom/
+├── app/                   # Next.js App Router pages and layouts
+│   ├── (pages)/           # Route groups for different sections
+│   │   ├── data-privacy-consumer/
+│   │   ├── data-privacy-website/
+│   │   ├── legal-notice/
+│   │   └── ...            # Other page routes
+│   ├── layout.tsx         # Root layout (Server Component)
+│   └── page.tsx           # Root page (Homepage)
+├── components/            # Reusable UI components
+│   ├── Footer.tsx         # Site footer (Client Component)
+│   ├── Header.tsx         # Site header (Client Component)
+│   ├── TolgeeProviderWrapper.tsx # Client Component for Tolgee setup
+│   └── ...                # Other shared components (CTA, Hero, etc.)
+├── public/                # Static assets (images, fonts, icons)
+│   ├── Logo1.svg
+│   ├── GDPR_CCPA.webp
+│   ├── footer_bg.svg
+│   └── ...
+├── styles/                # Global styles
+│   └── globals.css
+├── .env.local             # Local environment variables (e.g., Tolgee keys - **DO NOT COMMIT**)
+├── .gitignore             # Files ignored by Git
+├── package.json           # Project dependencies and scripts
+├── tsconfig.json          # TypeScript configuration
+├── next.config.mjs        # Next.js configuration (adjust extension if needed)
+├── postcss.config.js      # PostCSS configuration
+├── tailwind.config.js     # Tailwind CSS configuration
+└── README.md              # Project documentation (this file)
+```
 
-⸻
+## Key Features
 
-	3.	Section-by-Section Breakdown
+- **Modern Frontend Stack**: Built with Next.js App Router for optimal performance and developer experience.
+- **Responsive Design**: Fully responsive layout adapting to various screen sizes.
+- **Component-Based Architecture**: Reusable React components for maintainability.
+- **Utility-First Styling**: Efficient styling using Tailwind CSS.
+- **Internationalization (i18n)**: Supports German (default) and English languages using Tolgee.
+- **Optimized Assets**: Leverages `next/image` for optimized image delivery.
 
-3.1. Global Layout & Navigation
+## Getting Started
 
-Header & Navigation Bar
-	•	Logo: Display the company logo on the left.
-	•	Navigation Items: Include:
-	•	Homepage
-	•	EAP
-	•	Data
-	•	Pricing
-	•	Generic page
-	•	HR Compliance
-	•	Resources
-	•	404
-	•	Layout: Use a fixed header with precise spacing, fonts, and colors as per the design.
+### Prerequisites
 
-create_section “Header” {
-add_logo “assets/logo.png” position:“left”
-add_nav_links [“Homepage”, “EAP”, “Data”, “Pricing”, “Generic page”, “HR Compliance”, “Resources”, “404”]
-set_layout “flex” justify:“space-between” align:“center”
-}
+- [Node.js](https://nodejs.org/) (Version recommended by Next.js, e.g., >= 18.x)
+- [npm](https://www.npmjs.com/) (or [yarn](https://yarnpkg.com/))
 
-Footer
-	•	Content: Include company info, Impressum, Datenschutz – Webseite, Datenschutz – SaaS, Jobs, Resources, Customer Case Studies, Blog, and Product links.
-	•	Layout: Follow the PDF exactly in terms of text order and alignment.
+### Installation
 
-create_section “Footer” {
-add_text_block “Company | Impressum | Datenschutz – Webseite | Datenschutz – SaaS | Jobs | Resources | Customer Case Studies | Blog | Product”
-set_layout “grid” columns:1 align:“center”
-}
+1.  **Clone the repository:**
+    ```bash
+    # Replace with the correct repository URL if different
+    git clone https://github.com/bpnace/getbloom_website.git
+    cd getbloom_website
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    # yarn install
+    ```
+3.  **Set up environment variables:**
+    Create a `.env.local` file in the project root and add your Tolgee credentials:
+    ```.env.local
+    NEXT_PUBLIC_TOLGEE_API_KEY=<your_tolgee_api_key>
+    NEXT_PUBLIC_TOLGEE_API_URL=https://app.tolgee.io
+    ```
+    *(Replace `<your_tolgee_api_key>` with your actual key. Get credentials from [app.tolgee.io](https://app.tolgee.io/))*
 
-⸻
+### Running the Development Server
 
-3.2. Homepage
+Start the Next.js development server:
 
-Hero Section
-	•	Content:
-	•	Title: “Employee Assistance”
-	•	Description: “Konfiguriere ein individuelles EAP mit ganzheitlichen Angeboten für mentale und körperliche Gesundheit.”
-	•	Button: “Mehr erfahren”
-	•	Background: Use the background image/color from the PDF.
-	•	Layout: Center-aligned text and frame usage as shown.
+```bash
+npm run dev
+# or
+# yarn dev
+```
 
-create_section “Hero” {
-set_background “assets/hero-bg.jpg”
-add_text “Employee Assistance” style:“h1” align:“center”
-add_text “Konfiguriere ein individuelles EAP mit ganzheitlichen Angeboten für mentale und körperliche Gesundheit.” style:“paragraph” align:“center”
-add_button “Mehr erfahren” style:“primary” action:“navigate_to_EAP”
-}
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
-Key Features Section
-	•	Cards: Create three cards representing:
-	•	Employee Assistance
-	•	HR Compliance
-	•	Data & Insights
-	•	Each Card: Must include an icon/image, title, description, and a “Mehr erfahren” button.
-	•	Layout: Arrange the cards in a grid layout as per the design.
+## Available Scripts
 
-create_section “KeyFeatures” {
-for_each feature in [“Employee Assistance”, “HR Compliance”, “Data & Insights”] {
-create_card feature {
-add_icon “assets/icons/{feature_slug}.png”
-add_text feature style:“h2”
-add_text “Description text from PDF for “ + feature style:“paragraph”
-add_button “Mehr erfahren” style:“secondary” action:“navigate_to_” + feature_slug
-}
-}
-set_layout “grid” columns:3 gap:“20px”
-}
+- `npm run dev`: Starts the development server with hot-reloading.
+- `npm run build`: Creates a production-ready build of the application.
+- `npm run start`: Starts the production server (requires `npm run build` first).
+- `npm run lint`: Runs the Next.js linter to check for code quality issues.
+- `npm audit`: Checks for known vulnerabilities in dependencies.
+- `npm audit fix`: Attempts to automatically fix vulnerabilities.
 
-Additional Content Sections
-	•	Statistics & Testimonials: Include sections for performance stats (e.g., “-15 %”, “81 %”, “ROI 4:1”, “2.140 €”) and client testimonials.
-	•	Layout: Use frames and text alignment exactly as shown in the PDF.
+## Localization
 
-create_section “Statistics” {
-add_stat “Krankheitsquote” value:”-15 %”
-add_stat “Nutzerberichte” value:“81 %”
-add_stat “ROI” value:“4:1”
-add_stat “Kostenersparnis” value:“2.140 €”
-set_layout “flex” justify:“space-around” align:“center”
-}
+This project uses [Tolgee](https://tolgee.io/) for managing translations between German (`de`) and English (`en`).
 
-⸻
+- **Configuration:** Tolgee is initialized in `components/TolgeeProviderWrapper.tsx`.
+- **Adding/Editing Translations:** Manage translation keys and strings via the [Tolgee Platform](https://app.tolgee.io). New keys used with the `<T>` component in the code are automatically registered in the platform.
+- **Switching Languages:** The language switcher is implemented in `components/Header.tsx`.
 
-3.3. EAP Page
-	•	Content: Detailed Employee Assistance Program information.
-	•	Components: Hero section (similar to Homepage but with EAP-specific text), detailed description, and “Mehr erfahren” buttons.
-	•	Layout: Follow text and frame placements as per the PDF.
+## Deployment
 
-create_page “EAP” {
-include_section “Hero_EAP” // Use EAP-specific hero text
-include_section “Details” {
-add_text “Konfiguriere ein individuelles EAP mit ganzheitlichen Angeboten…” style:“paragraph”
-add_button “Mehr erfahren” style:“primary” action:“open_EAP_details”
-}
-// Additional frames for testimonials, team profiles, etc.
-}
+The application can be deployed to any platform supporting Next.js applications. [Vercel](https://vercel.com/) (the creators of Next.js) is highly recommended for seamless deployment.
 
-⸻
+Connect your GitHub repository to Vercel for automatic deployments on push. Ensure environment variables (`NEXT_PUBLIC_TOLGEE_API_KEY`, `NEXT_PUBLIC_TOLGEE_API_URL`) are configured in the Vercel project settings.
 
-3.4. Data Page
-	•	Content: Dashboard layout with charts, filters (date pickers, calendars), and data cards.
-	•	Components: Filtering tools and chart frames must be created exactly as shown.
-	•	Layout: Follow the grid and flex layout for dashboard components.
+## Contributing
 
-create_page “Data” {
-include_section “FilterBar” {
-add_dropdown “Zeitraum” options:[“Heute”, “Letzte 7 Tage”, “Dieser Monat”, “Letzte N Tage”]
-add_calendar “DatePicker” range:“01.01.2023 - 31.12.2023”
-}
-include_section “Dashboard” {
-add_chart “Krankheitsrate” type:“line” data_source:“data_chart.json”
-add_card “Krankheitsdauer” value:“15,4 Tage”
-// Additional cards and charts as per design.
-}
-}
+Contributions are welcome! Please follow standard Git workflow (branch, commit, push, pull request) if contributing. (Add more specific guidelines if needed).
 
-⸻
+## License
 
-3.5. Pricing Page
-	•	Content: Display pricing plans (e.g., “STARTER” plan) with details on features and limits.
-	•	Components: Each pricing card must include features, details, and buttons like “Demo buchen” or “Book Demo”.
-	•	Layout: Arrange pricing cards in a grid format.
+This project is licensed under the MIT License - see the LICENSE file for details (if one exists, otherwise specify).
 
-create_page “Pricing” {
-create_pricing_card “STARTER” {
-add_feature “Apps & digital Courses”
-add_feature “1on1 Sessions”
-add_detail “Ø Bookings per user: 3”
-add_button “Demo buchen” style:“primary” action:“book_demo”
-}
-// Add additional pricing cards as per the design.
-set_layout “grid” columns:2 gap:“30px”
-}
+---
 
-⸻
-
-3.6. Generic Page
-	•	Purpose: A template for content pages.
-	•	Components: Headline, sub-headlines, paragraphs, and optional fact blocks.
-	•	Layout: Use the exact text styling and spacing from the PDF.
-
-create_page “Generic” {
-add_text “Headline 1” style:“h1”
-add_text “Body content text as specified in PDF.” style:“paragraph”
-add_optional_block {
-add_text “Optional: Headline” style:“h2”
-add_text “Optional: Fact content lorem ipsum…” style:“paragraph”
-}
-}
-
-⸻
-
-3.7. HR Compliance Page
-	•	Content: Detailed instructions and frameworks for HR Compliance.
-	•	Components: Step-by-step sections, compliance texts, and call-to-action buttons (“Demo buchen”).
-	•	Layout: Use frames for each compliance step.
-
-create_page “HR_Compliance” {
-add_text “Die komfortable Lösung zur Erfüllung von Compliance-Anforderungen im HR-Bereich” style:“h1”
-add_text “Reduziere die Komplexität von Compliance im HR-Bereich…” style:“paragraph”
-add_button “Demo buchen” style:“primary” action:“book_demo”
-// Additional sections for each compliance step.
-}
-
-⸻
-
-3.8. Resources Page
-	•	Content: Display blog posts, customer case studies, and resource articles.
-	•	Components: Article cards with title, date, excerpt, and “Artikel lesen” buttons.
-	•	Layout: Use grid layouts and include filters for date and categories.
-
-create_page “Resources” {
-create_filter_bar {
-add_dropdown “Nach Zeit” options:[“Heute”, “Letzte 7 Tage”, “Dieser Monat”, “Letzte N Tage”]
-}
-for_each article in resource_articles {
-create_article_card {
-add_title article.title
-add_date article.date
-add_excerpt article.excerpt
-add_button “Artikel lesen” style:“secondary” action:“open_article”
-}
-}
-set_layout “grid” columns:3 gap:“20px”
-}
-
-⸻
-
-3.9. 404 Page
-	•	Content: Custom error message and navigation to return home.
-	•	Text: “Diese Seite existiert leider nicht. Falls du das für einen Fehler hältst, melde dich bei uns!”
-	•	Button: “Zurück zu Home”
-
-create_page “404” {
-add_text “Diese Seite existiert leider nicht. Falls du das für einen Fehler hältst, melde dich bei uns!” style:“h1” align:“center”
-add_button “Zurück zu Home” style:“primary” action:“navigate_home”
-set_layout “centered”
-}
-
-⸻
-
-	4.	Reusable Component Definitions
-
-4.1. Buttons
-	•	Styles: Define reusable styles for primary, secondary, and tertiary buttons.
-	•	Properties: Set colors, border-radius, padding, and hover effects as per the design.
-
-define_component “Button” {
-properties: {
-primary: { background: “#007BFF”, font: “Roboto”, border_radius: “5px”, padding: “10px 20px” },
-secondary: { background: “#FFFFFF”, font: “Roboto”, border: “1px solid #007BFF”, border_radius: “5px”, padding: “10px 20px” }
-}
-}
-
-4.2. Cards & Frames
-	•	Cards: Used for features, testimonials, and pricing. Must have consistent margins, padding, and border styling.
-	•	Frames/Sections: Wrap each section with fixed layout, spacing, and alignment.
-
-define_component “Card” {
-properties: {
-padding: “20px”,
-margin: “10px”,
-border: “1px solid #ddd”,
-border_radius: “5px”,
-shadow: “none”
-}
-}
-
-4.3. Text Blocks
-	•	Headings & Paragraphs: Use the exact font sizes, weights, and colors as specified.
-	•	Components: Define components for headlines (h1, h2, etc.) and body text.
-
-define_component “TextBlock” {
-properties: {
-h1: { font_size: “36px”, font_weight: “bold” },
-p: { font_size: “16px”, line_height: “1.5” }
-}
-}
-
-⸻
-
-	5.	Final Assembly and Testing
-	6.	Assemble All Pages: Combine the Homepage, EAP, Data, Pricing, Generic, HR Compliance, Resources, and 404 pages into the full website structure.
-	7.	Ensure Reusability: Verify that all components (buttons, cards, text blocks) are defined once and reused consistently.
-	8.	Test Responsiveness & Accessibility: Ensure the layout adapts correctly to different screen sizes and meets accessibility standards.
-	9.	Export & Save Configuration: Save the project configuration to allow future updates and reuse.
-
-⸻
-
-	6.	Conclusion
-
-Use the above instructions in Cursor Agent Mode on Cloud 3.7 to perfectly recreate the website design as provided in the PDF. Every component and section has been defined explicitly to ensure exact replication and reusability. Adjust asset paths, texts, and any style details as necessary to match the final design.
+© {new Date().getFullYear()} Bloom - A Brand of Menta Health GmbH
