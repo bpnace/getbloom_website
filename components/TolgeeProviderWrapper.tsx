@@ -1,32 +1,72 @@
 'use client';
 
-import React from 'react';
-import { TolgeeProvider, Tolgee, FormatSimple } from '@tolgee/react';
-// Removed TolgeeInstance type import as it's not needed for sync init
+import React, { useState, useEffect } from 'react';
+import { TolgeeProvider, Tolgee, FormatSimple, TolgeeInstance } from '@tolgee/react';
 
-// Initialize Tolgee synchronously OUTSIDE the component
-// NOTE: This might block initial render slightly, but good for debugging context.
-const tolgeeInstance = Tolgee()
-  .use(FormatSimple())
-  .init({
-    apiKey: process.env.NEXT_PUBLIC_TOLGEE_API_KEY,
-    apiUrl: process.env.NEXT_PUBLIC_TOLGEE_API_URL,
-    availableLanguages: ['de', 'en'],
-    defaultLanguage: 'de',
-    // Synchronous init doesn't use run() explicitly here
-  });
+// Import translations directly here
+import deTranslations from '../de-DE.json';
+import enTranslations from '../en.json';
+
+// Remove dependency on lib/tolgee.ts
 
 interface TolgeeProviderWrapperProps {
   children: React.ReactNode;
 }
 
 const TolgeeProviderWrapper: React.FC<TolgeeProviderWrapperProps> = ({ children }) => {
-  // Remove useState and useEffect
+  // State for the fully initialized instance
+  const [tolgee, setTolgee] = useState<TolgeeInstance | null>(null);
 
-  // Render the provider directly with the pre-initialized instance
+  // Initialize Tolgee and wait for .run()
+  useEffect(() => {
+    let isMounted = true;
+    console.log('[TolgeeProviderWrapper] useEffect: Initializing Tolgee...');
+
+    const instance = Tolgee()
+      .use(FormatSimple())
+      .init({
+        // Keep API keys commented out
+        // apiKey: process.env.NEXT_PUBLIC_TOLGEE_API_KEY,
+        // apiUrl: process.env.NEXT_PUBLIC_TOLGEE_API_URL,
+        availableLanguages: ['de', 'en'],
+        defaultLanguage: 'de',
+        staticData: {
+          de: deTranslations,
+          en: enTranslations,
+        },
+      });
+      
+    // Wait for initialization to complete via run()
+    instance.run().then(() => {
+        console.log('[TolgeeProviderWrapper] useEffect: instance.run() completed.');
+        if (isMounted) {
+            console.log('[TolgeeProviderWrapper] useEffect: Setting tolgee state.');
+            setTolgee(instance); 
+        } else {
+             console.log('[TolgeeProviderWrapper] useEffect: instance.run() completed, but component unmounted.');
+        }
+    }).catch(error => {
+        console.error('[TolgeeProviderWrapper] useEffect: Tolgee instance.run() failed:', error);
+    });
+
+    return () => {
+      isMounted = false;
+      // Optional: stop the instance if needed on unmount
+      // instance?.stop(); 
+      console.log('[TolgeeProviderWrapper] useEffect: Cleanup.');
+    };
+  }, []); // Run only once on mount
+
+  // Render fallback until the instance is ready and set in state
+  if (!tolgee) {
+    console.log('[TolgeeProviderWrapper] Rendering fallback (tolgee state is null).');
+    return <div>Loading Languages...</div>; 
+  }
+
+  console.log('[TolgeeProviderWrapper] Rendering TolgeeProvider with lang:', tolgee.getLanguage());
   return (
-    <TolgeeProvider tolgee={tolgeeInstance} fallback="Loading..."> 
-      {children}
+    <TolgeeProvider tolgee={tolgee} fallback={<div>Loading Tolgee...</div>}>
+        {children}
     </TolgeeProvider>
   );
 };
