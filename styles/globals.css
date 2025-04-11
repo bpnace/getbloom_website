@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-blue: #1C2DEF;
+  --light-gray: #EEEEEE;
+  --dark-gray: #221F20;
+  --neutral-gray: #6D6D6D;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  color: var(--text-dark);
+}
