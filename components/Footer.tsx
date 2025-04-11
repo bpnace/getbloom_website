@@ -1,6 +1,9 @@
+'use client'; // Add directive because T component needs client context
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { T } from '@tolgee/react';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -12,9 +15,14 @@ const Footer: React.FC = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
             <div>
-              <h3 className="font-medium text-xl text-darkGray mb-4">Daten & Sicherheit</h3>
+              <h3 className="font-medium text-xl text-darkGray mb-4">
+                <T keyName="footer_data_security_heading" defaultValue="Daten & Sicherheit" />
+              </h3>
               <p className="text-neutralGray">
-                Datenschutz und Sicherheit von Bloom orientieren sich an branchenführenden Standards Dritter.
+                <T 
+                  keyName="footer_data_security_paragraph"
+                  defaultValue="Datenschutz und Sicherheit von Bloom orientieren sich an branchenführenden Standards Dritter."
+                />
               </p>
             </div>
             <div className="flex items-center justify-center md:justify-end space-x-8">
@@ -88,19 +96,11 @@ const Footer: React.FC = () => {
               </ul>
             </div>
             <div>
-              <h4 className="text-white font-medium mb-4">Ressourcen</h4>
-              <ul className="space-y-2 text-white text-opacity-70">
-                <li><Link href="/resources" className="hover:text-opacity-100">Übersicht</Link></li>
-                <li><Link href="/case-studies" className="hover:text-opacity-100">Kundenberichte</Link></li>
-                <li><Link href="/blog" className="hover:text-opacity-100">Blog</Link></li>
-              </ul>
-            </div>
-            <div>
               <h4 className="text-white font-medium mb-4">Unternehmen</h4>
               <ul className="space-y-2 text-white text-opacity-70">
-                <li><Link href="/impressum" className="hover:text-opacity-100">Impressum</Link></li>
-                <li><Link href="/datenschutz-website" className="hover:text-opacity-100">Datenschutz – Webseite</Link></li>
-                <li><Link href="/datenschutz-consumer" className="hover:text-opacity-100">Datenschutz – Consumer</Link></li>
+                <li><Link href="/legal-notice" className="hover:text-opacity-100">Impressum</Link></li>
+                <li><Link href="/data-privacy-website" className="hover:text-opacity-100">Datenschutz – Webseite</Link></li>
+                <li><Link href="/data-privacy-consumer" className="hover:text-opacity-100">Datenschutz – App</Link></li>
                 <li><Link href="/jobs" className="hover:text-opacity-100">Jobs</Link></li>
               </ul>
             </div>

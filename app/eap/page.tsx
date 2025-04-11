@@ -1,83 +1,73 @@
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+
+// It's good practice to define metadata for each page
 import type { Metadata } from 'next';
-import Layout from '../../components/Layout';
-// Import other necessary components (e.g., CTA) or create new ones for EAP content
-import CTA from '../../components/CTA';
 
 export const metadata: Metadata = {
-  title: 'EAP - Employee Assistance Program | Bloom Clone',
-  description: 'Maßgeschneiderte EAP für die mentale und körperliche Gesundheit deiner Mitarbeiter:innen. Psychologische Einzelgespräche, Workshops, Kurse und Apps.',
+  title: 'EAP - Employee Assistance Program | Bloom',
+  // Add a description if desired
+  // description: 'Description for EAP page',
 };
 
-// Placeholder components for EAP sections - these would need actual implementation
-const EapFormatsSection = () => (
-  <section className="py-16 px-6 bg-gray-50">
-    <div className="max-w-7xl mx-auto text-center">
-      <h2 className="text-3xl font-medium text-darkGray mb-12">Du entscheidest, welche Formate deinem Team zur Verfügung stehen</h2>
-      {/* TODO: Implement Tabs/Content for Psychologische Einzelgespräche, Live-Kurse, Apps, Gesundheits-Mediathek */}
-      <p className="text-neutralGray">(Placeholder for EAP Formats Section - Tabs/Content needed)</p>
-    </div>
-  </section>
-);
-
-const EapTopicsSection = () => (
-  <section className="py-16 px-6 bg-white">
-    <div className="max-w-7xl mx-auto text-center">
-      <h2 className="text-3xl font-medium text-darkGray mb-12">Bloom unterstützt dein Team – zu einer Vielzahl von Themenbereichen</h2>
-      {/* TODO: Implement grid/list of topics (Burnout, Psychosomatik, etc.) */}
-      <p className="text-neutralGray">(Placeholder for EAP Topics Section - Grid/List needed)</p>
-    </div>
-  </section>
-);
-
-const EapConsultingSection = () => (
-  <section className="py-16 px-6 bg-gray-50">
-    <div className="max-w-7xl mx-auto text-center">
-      <h2 className="text-3xl font-medium text-darkGray mb-12">Individuelle Beratung für jede Mitarbeiter:in</h2>
-      {/* TODO: Implement content about consulting and image */}
-      <p className="text-neutralGray">(Placeholder for EAP Consulting Section - Content/Image needed)</p>
-    </div>
-  </section>
-);
-
-const EapStatsSection = () => (
-  <section className="py-16 px-6 bg-white">
-    <div className="max-w-7xl mx-auto text-center">
-      {/* TODO: Implement stats section (Nutzung, Zufriedenheit, Employer Branding) */}
-      <p className="text-neutralGray">(Placeholder for EAP Stats Section)</p>
-    </div>
-  </section>
-);
-
-// Main EAP Page Component
-export default function EapPage() {
+export default function EAPPage() {
   return (
-    <Layout>
-      {/* Hero Section - Similar to Home, but EAP specific */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 px-6 md:px-12 lg:px-20 text-center bg-gradient-to-b from-blue-50 to-white">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-medium text-darkGray mb-6 leading-tight">
-            Das revolutionäre und individuell konfigurierbare Employee Assistance Program
-          </h1>
-          <p className="text-lg md:text-xl text-neutralGray mb-8 max-w-2xl mx-auto">
-            Stelle mit Bloom ein maßgeschneiderte EAP für die mentale und körperliche Gesundheit deiner Mitarbeiter:innen zusammen. Wähle aus psychologischen Einzelgesprächen, Workshops, Live- und Videokursen sowie Apps und digitalen Kursen die Angebote, die am besten zu deinem Team passen.
-          </p>
-          <button className="bg-primary text-white py-3 px-8 rounded-md font-medium hover:bg-opacity-90 transition-colors text-lg">
-            Demo buchen {/* TODO: Link this button */}
-          </button>
+    <>
+      <div className="pt-28 pb-16 bg-white">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                Employee Assistance
+              </h1>
+              <p className="text-lg text-gray-700 mb-8 max-w-xl">
+                Konfiguriere ein individuelles EAP mit ganzheitlichen Angeboten für mentale und körperliche Gesundheit.
+              </p>
+              <div className="mt-8">
+                <Link 
+                  href="/demo" 
+                  className="bg-primary text-white py-3 px-8 rounded-full font-medium hover:bg-secondary transition-colors text-center inline-flex items-center"
+                >
+                  Demo buchen
+                  <svg className="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+            <div className="flex justify-center">
+              <div className="rounded-lg overflow-hidden w-full max-w-lg h-96 bg-gray-100 flex items-center justify-center">
+                {/* Consider adding an actual image here using next/image */}
+                {/* <Image src="/path/to/eap-image.jpg" alt="EAP Illustration" width={500} height={384} /> */}
+                <p className="text-gray-500">EAP Image Placeholder</p> 
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* Placeholder sections for the rest of the content */}
-      <EapFormatsSection />
-      <EapTopicsSection />
-      <EapConsultingSection />
-      <EapStatsSection />
-
-      {/* Reusable CTA Component */}
-      <CTA 
-        title="Erfahre mehr über Bloom" 
-        text="Erfahre, wie du mit Bloom arbeitsmedizinische Vorsorge effizient organisierst, die Gesundheit des Teams förderst und gesetzliche Anforderungen erfüllst."
-      />
-    </Layout>
+      <div className="py-16 bg-white">
+        <div className="container mx-auto px-6 md:px-12 lg:px-20">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-3xl font-bold mb-6">Was ist ein Employee Assistance Program?</h2>
+            <p className="text-lg text-gray-700 mb-6">
+              Ein Employee Assistance Program (EAP) ist ein Unterstützungsprogramm für Mitarbeiter, das verschiedene Dienste anbietet, um das emotionale, mentale und allgemeine Wohlbefinden der Beschäftigten zu fördern.
+            </p>
+            <p className="text-lg text-gray-700 mb-6">
+              Mit dem EAP von Bloom können Unternehmen ihren Mitarbeitern:innen ganzheitliche Angebote für mentale und körperliche Gesundheit bieten, die individuell auf die Bedürfnisse des Unternehmens zugeschnitten sind.
+            </p>
+            <h2 className="text-3xl font-bold mb-6 mt-12">Vorteile des Bloom EAP</h2>
+            <ul className="list-disc pl-6 text-lg text-gray-700 mb-6 space-y-2">
+              <li>Individuell konfigurierbar nach den Bedürfnissen Ihres Unternehmens</li>
+              <li>Umfassende Angebote für mentale und körperliche Gesundheit</li>
+              <li>Einfache Integration in bestehende HR-Systeme</li>
+              <li>Nachweisliche Reduktion von Krankheitskosten und Ausfallzeiten</li>
+              <li>Verbesserung der Mitarbeiterzufriedenheit und -bindung</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </>
   );
 } 

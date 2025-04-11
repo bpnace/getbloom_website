@@ -1,13 +1,73 @@
-"use client";
+'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTolgee } from '@tolgee/react';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [productMenuOpen, setProductMenuOpen] = useState(false);
   const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+
+  // Get Tolgee functions
+  const { tolgee } = useTolgee();
+
+  // Use state to manage current language, update it when tolgee instance is ready
+  const [currentLanguage, setCurrentLanguage] = useState<string>('de');
+
+  useEffect(() => {
+    if (tolgee) { // Check if tolgee instance is available
+      setCurrentLanguage(tolgee.getLanguage() || 'de');
+
+      // Optional: Subscribe to language changes if needed elsewhere in header
+      const subscription = tolgee.on('language', () => {
+        setCurrentLanguage(tolgee.getLanguage() || 'de');
+      });
+      // Cleanup subscription on unmount
+      return () => subscription.unsubscribe();
+    }
+  }, [tolgee]); // Rerun effect when tolgee instance becomes available
+
+  const changeLanguage = (lang: string) => {
+    if (tolgee) { // Check if tolgee instance exists before calling changeLanguage
+      tolgee.changeLanguage(lang);
+      setLanguageMenuOpen(false); // Close dropdown on selection
+      setMobileMenuOpen(false); // Close mobile menu on selection
+    }
+  };
+
+  // Refs for dropdowns
+  const productMenuRef = useRef<HTMLDivElement>(null);
+  const languageMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        productMenuRef.current && 
+        !productMenuRef.current.contains(event.target as Node)
+      ) {
+        setProductMenuOpen(false);
+      }
+      if (
+        languageMenuRef.current &&
+        !languageMenuRef.current.contains(event.target as Node)
+      ) {
+        setLanguageMenuOpen(false);
+      }
+    };
+
+    // Add listener if any menu is open
+    if (productMenuOpen || languageMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Cleanup listener
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [productMenuOpen, languageMenuOpen]); // Rerun effect if menu state changes
 
   return (
     <header className="bg-lightGray py-3 px-6 md:px-12 lg:px-20 fixed top-0 left-0 right-0 z-50 shadow-sm">
@@ -33,7 +93,7 @@ const Header: React.FC = () => {
           <Link href="/" className="text-darkGray hover:text-primary font-medium">
             Home
           </Link>
-          <div className="relative group">
+          <div className="relative group" ref={productMenuRef}>
             <button 
               className="text-darkGray hover:text-primary font-medium flex items-center"
               onClick={() => setProductMenuOpen(!productMenuOpen)}
@@ -54,31 +114,31 @@ const Header: React.FC = () => {
                   <span className="font-medium">Digitale Arbeitsmedizin</span>
                   <p className="text-xs text-neutralGray mt-1">Digitale Lösung für Vorsorgekartei, Gesundheitsmanagement & Arbeitssicherheit.</p>
                 </Link>
-                <Link href="/data" className="block px-4 py-3 text-sm text-darkGray hover:bg-lightGray">
-                  <span className="font-medium">Daten & Einblicke</span>
-                  <p className="text-xs text-neutralGray mt-1">Das People-Analytics Dashboard rund um Abwesenheiten und Krankheit.</p>
-                </Link>
               </div>
             )}
           </div>
-          <Link href="/resources" className="text-darkGray hover:text-primary font-medium">
-            Ressourcen
-          </Link>
-          
-          <div className="relative ml-4">
+          <div className="relative ml-4" ref={languageMenuRef}>
             <button 
               className="flex items-center justify-center rounded-full bg-white w-8 h-8 text-sm font-medium text-darkGray"
               onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
             >
-              DE
+              {currentLanguage.toUpperCase()}
             </button>
             
             {languageMenuOpen && (
               <div className="absolute right-0 mt-2 w-32 bg-white border border-lightGray rounded-lg shadow-lg z-50">
-                <button className="w-full text-left px-4 py-2 text-sm text-darkGray hover:bg-lightGray">
+                <button
+                  className="w-full text-left px-4 py-2 text-sm text-darkGray hover:bg-lightGray disabled:opacity-50"
+                  onClick={() => changeLanguage('de')}
+                  disabled={currentLanguage === 'de' || !tolgee} // Disable if tolgee not ready
+                >
                   Deutsch
                 </button>
-                <button className="w-full text-left px-4 py-2 text-sm text-darkGray hover:bg-lightGray">
+                <button
+                  className="w-full text-left px-4 py-2 text-sm text-darkGray hover:bg-lightGray disabled:opacity-50"
+                  onClick={() => changeLanguage('en')}
+                  disabled={currentLanguage === 'en' || !tolgee} // Disable if tolgee not ready
+                >
                   English
                 </button>
               </div>
@@ -146,21 +206,22 @@ const Header: React.FC = () => {
                     <span className="font-medium">Digitale Arbeitsmedizin</span>
                     <p className="text-xs text-neutralGray">Digitale Lösung für Vorsorgekartei, Gesundheitsmanagement & Arbeitssicherheit.</p>
                   </Link>
-                  <Link href="/data" className="block py-2 text-sm text-darkGray">
-                    <span className="font-medium">Daten & Einblicke</span>
-                    <p className="text-xs text-neutralGray">Das People-Analytics Dashboard rund um Abwesenheiten und Krankheit.</p>
-                  </Link>
                 </div>
               )}
             </div>
-            <Link href="/resources" className="text-darkGray hover:text-primary font-medium py-2">
-              Ressourcen
-            </Link>
             <div className="flex space-y-2 flex-col">
-              <button className="text-darkGray py-2 text-left flex items-center">
+              <button
+                className="text-darkGray py-2 text-left flex items-center hover:text-primary disabled:opacity-50"
+                onClick={() => changeLanguage('de')}
+                disabled={currentLanguage === 'de' || !tolgee} // Disable if tolgee not ready
+              >
                 Deutsch
               </button>
-              <button className="text-darkGray py-2 text-left flex items-center">
+              <button
+                className="text-darkGray py-2 text-left flex items-center hover:text-primary disabled:opacity-50"
+                onClick={() => changeLanguage('en')}
+                disabled={currentLanguage === 'en' || !tolgee} // Disable if tolgee not ready
+              >
                 English
               </button>
             </div>
